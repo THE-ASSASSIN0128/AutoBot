@@ -6,6 +6,10 @@ const token = process.env["Token"];
 const express = require("express");
 const app = express();
 
+//All Functions
+const { loadEvents } = require(`${process.cwd()}/Handlers/Events.js`);
+const { loadMessages } = require(`${process.cwd()}/Handlers/Messages.js`);
+
 
 
 app.listen(3000, () => {
@@ -18,7 +22,7 @@ app.get("/", (req, res) => {
 
 //Making a client property to use globally.
 const client = new Client({
-  intents: 33409, 
+  intents: 34815, 
   allowedMentions: {
     repliedUser: false
   }
@@ -32,10 +36,9 @@ client.aliases = new Collection();
 
 
 //Connect to your bot by using a token (provided by discord)
-client.login(token)
-  .then(() => {
-    console.log(`logged in as ${client.user.tag}`)
-  })
-  .catch((error) => {
-    console.error(error)
-  });
+client.login(token).then(() => {
+  loadEvents(client);
+  loadMessages(client);
+}).catch((error) => {
+  console.error(error)
+});

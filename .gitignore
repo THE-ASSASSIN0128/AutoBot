@@ -1,5 +1,5 @@
 node_modules
 .replit
 replit.nix
-package_lock.json
+package-lock.json
 .config

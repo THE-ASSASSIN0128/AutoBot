@@ -12,6 +12,7 @@ function loadInteractions(client) {
   const Table = new ascii("slash commands")
     .setHeading("file", "status");
 
+  const Interactions = [];
   const folders = fs
     .readdirSync(`${process.cwd()}/Interactions`)
   
@@ -21,7 +22,6 @@ function loadInteractions(client) {
       .filter(file => file.endsWith(".js"));
     
     for (const file of files) {
-      const ArrayofInteractions = [];
       const command = require(`${process.cwd()}/Interactions/${folder}/${file}`);
       
       if (!command.name) {
@@ -34,16 +34,17 @@ function loadInteractions(client) {
       Table.addRow(file, "🟢loaded");
       
       client.interactions.set(command.name, command);
-      ArrayofInteractions.push(command);
-      try {
-        const guild = client.guilds.cache.get(guilds.main);
-        guild.commands.set( ArrayofInteractions);
-      } catch (error) {
-        console.error(error)
-      };
+      Interactions.push(command);
+      
       continue;
     }
   }
+  try {
+    const guild = client.guilds.cache.get(guilds.main);
+    guild.commands.set(Interactions);
+  } catch (error) {
+    console.error(error)
+  };
   return console.log(Table.toString());
 };
 

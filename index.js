@@ -2,7 +2,7 @@ const {
   Client,
   Collection
 } = require("discord.js");
-const token = process.env["Token"];
+const token = process.env["Token"]
 const express = require("express");
 const app = express();
 

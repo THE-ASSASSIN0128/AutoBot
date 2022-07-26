@@ -19,7 +19,7 @@ module.exports = {
   async execute(interaction, client) {
 
     //Checking interaction type.
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
       
       try {
         //Getting the command
@@ -126,7 +126,7 @@ module.exports = {
         
         interaction.reply({
           embeds: [
-            new MessageEmbed()
+            new EmbedBuilder()
             .setAuthor({
               name: "ERROR",
               iconURL: `${image.error}`

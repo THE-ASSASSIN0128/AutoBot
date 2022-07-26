@@ -27,17 +27,16 @@ require(`${cwd()}/Events/Client/ready.js`);
 
 
 module.exports = {
-  name: "status",
+  name: "stats",
   category: "Information",
   description: "Replies with the bots currnet status.",
-  aliases: ["stats"],
-  run: async(client, message, args) => {
+  execute: async(interaction, client) => {
     let uptime = Math.floor (client.uptime / 1000)
     let days = Math.floor(uptime / 86400)
     let hours = Math.floor(uptime / 3600) % 24
     let minutes = Math.floor(uptime / 60) % 60
     let seconds = Math.floor(uptime) % 60 
-    let webLatency = new Date() - message.createdAt   
+    let webLatency = new Date() - interaction.createdAt   
     let apiLatency = client.ws.ping
     let totalLatency = webLatency + apiLatency
     let emLatency = {
@@ -45,7 +44,7 @@ module.exports = {
       Yellow: '🟡',
       Red: '🔴'
     };
-    let king = message.guild.members.cache.get(owner.id)
+    let king = interaction.guild.members.cache.get(owner.id)
 
 /*
            .addField(`📡 Websocket Latency`, `\`${webLatency <= 200 ? emLatency.Green : webLatency <= 400 ? emLatency.Yellow : emLatency.Red}\` \`${webLatency}\`ms`)
@@ -100,7 +99,7 @@ module.exports = {
 					]),
 			);*/
     
-    await message.channel.send({
+    await interaction.reply({
       embeds: [Status]
     });
   }
@@ -121,4 +120,4 @@ function switchTo(val) {
     break;
   };
   return status;
-};
+}

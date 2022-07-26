@@ -1,28 +1,3 @@
-
-
-module.exports = async(client, PG, ascii) => {
-  const Table = new ascii("message commands");
-  Table.setHeading("files", "status");
-  (await PG(`${process.cwd()}/Commands/Message/*/*.js`)).map(
-    async(file) => {
-      const command = require(file);
-      const M = file.split("/");
-      
-      if (!command.name)
-        return Table.addRow(M[7], "• missing a name");
-
-      client.commands.set(command.name, command);
-
-     if (command.aliases)
-       command.aliases.forEach(
-         async(alias) => {
-           client.aliases.set(alias, command.name)
-         })
-      Table.addRow(M[7], "✓");
-    });
-  console.log(Table.toString());
-};
-
 function loadMessages(client) {
   const fs = require("fs");
   const ascii = require("ascii-table");

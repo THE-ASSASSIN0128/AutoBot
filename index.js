@@ -9,6 +9,7 @@ const app = express();
 //All Functions
 const { loadEvents } = require(`${process.cwd()}/Handlers/Events.js`);
 const { loadMessages } = require(`${process.cwd()}/Handlers/Messages.js`);
+const { loadInteractions } = require(`${process.cwd()}/Handlers/Interactions.js`);
 
 
 
@@ -39,6 +40,7 @@ client.aliases = new Collection();
 client.login(token).then(() => {
   loadEvents(client);
   loadMessages(client);
+  loadInteractions(client);
 }).catch((error) => {
   console.error(error)
 });

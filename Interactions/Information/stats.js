@@ -63,8 +63,8 @@ module.exports = {
       })}`)
       .addFields(
         {
-        name: "BOT'S INFO",
-        value:`**❕ Status** :  [\`🟢\`] Online\n**🏓 Ping** : ${client.ws.ping}ms\n**⏱️ Uptime** :\n\`\`\`\n${days}Days, ${hours}Hours, ${minutes}Minutes, ${seconds}Seconds\n\`\`\``
+          name: "BOT'S INFO",
+          value:`**❕ Status** :  [\`🟢\`] Online\n**🏓 Ping** : ${client.ws.ping}ms\n**⏱️ Uptime** :\n\`\`\`\n${days}Days, ${hours}Hours, ${minutes}Minutes, ${seconds}Seconds\n\`\`\``
         },
         {
           name: "DataBase INFO",

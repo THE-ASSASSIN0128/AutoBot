@@ -1,6 +1,6 @@
 {
-  "name": "AutoBot",
-  "version": "1.0.4",
+  "name": "autobot",
+  "version": "1.0.5",
   "description": "A multipurpose discord bot.",
   "main": "index.js",
   "scripts": {
@@ -18,12 +18,12 @@
     "@discordjs/voice": "^0.11.0",
     "@types/node": "^18.0.6",
     "ascii-table": "^0.0.9",
-    "discord.js": "^14.0.3",
+    "discord.js": "^14.1.2",
     "express": "^4.18.1",
     "moment": "^2.29.4",
     "mongoose": "^6.4.6",
     "ms": "^2.1.3",
-    "node-fetch": "^3.2.9",
+    "npm": "^8.15.1",
     "timers": "^0.1.1"
   },
   "repository": {
@@ -33,5 +33,8 @@
   "bugs": {
     "url": "https://github.com/THE-ASSASSIN0128/AutoBot/issues"
   },
-  "homepage": "https://github.com/THE-ASSASSIN0128/AutoBot#readme"
+  "homepage": "https://github.com/THE-ASSASSIN0128/AutoBot#readme",
+  "directories": {
+    "doc": "docs"
+  }
 }

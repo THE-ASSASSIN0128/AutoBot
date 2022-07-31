@@ -3,6 +3,11 @@ const {
   image,
   guilds
 } = require(`${process.cwd()}/config.json`);
+const {
+  Routes,
+  REST
+} = require('discord.js');
+const rest = new REST({ version: "10" }).setToken(process.env["Token"]);
 
 
 
@@ -39,12 +44,16 @@ function loadInteractions(client) {
       continue;
     }
   }
-  try {
-    const guild = client.guilds.cache.get(guilds.main);
-    guild.commands.set(Interactions);
-  } catch (error) {
-    console.error(error)
-  };
+  (async(command) => {
+    if (command.testOnly) {
+      await rest.put(
+        Routes.applicationGuildCommands(bot.id, guilds.main), { body: Interactions });
+    } else {
+      await rest.put(
+        Routes.applicationCommands(bot.id), { body: Interactions });
+    };
+  })
+  
   return console.log(Table.toString());
 };
 

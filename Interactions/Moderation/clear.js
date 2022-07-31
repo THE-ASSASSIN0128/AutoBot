@@ -12,6 +12,7 @@ const wait = require("timers/promises").setTimeout;
 module.exports = {
   name: "clear",
   description: "Delete a certain amount of message in a channel.",
+  testOnly: true,
   usage: "[clear] is command name.\nCommand Usage : \n/clear {amount:} {amount} | [user]: {user} []: []:",
   options: [
     {

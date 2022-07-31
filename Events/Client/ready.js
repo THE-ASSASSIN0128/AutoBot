@@ -40,9 +40,6 @@ module.exports = {
       })
       .setTimestamp()
 
-    channel.send({
-      embeds: [Status]
-    });
     
 		console.log(`Ready! Logged in as ${client.user.tag}`);
     client.user.setPresence({

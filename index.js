@@ -1,6 +1,7 @@
 const {
   Client,
-  Collection
+  Collection,
+  Partials
 } = require("discord.js");
 const token = process.env["Token"]
 const express = require("express");
@@ -23,7 +24,11 @@ app.get("/", (req, res) => {
 
 //Making a client property to use globally.
 const client = new Client({
-  intents: 34815, 
+  intents: 34815,
+  partials: [
+    Partials.Channel,
+    Partials.User
+  ],
   allowedMentions: {
     repliedUser: false
   }
@@ -37,10 +42,11 @@ client.aliases = new Collection();
 
 
 //Connect to your bot by using a token (provided by discord)
-client.login(token).then(() => {
+client.login(token);
+try {
   loadEvents(client);
   loadMessages(client);
   loadInteractions(client);
-}).catch((error) => {
-  console.error(error)
-});
+} catch (error) {
+  console.error(error);
+};

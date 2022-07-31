@@ -11,6 +11,7 @@ const { loadInteractions } = require(`${process.cwd()}/Handlers/Interactions.js`
 module.exports = {
   name: "reload",
   description: "Reload Events/Commands",
+  testOnly: true,
   options: [
     {
       name: "events",

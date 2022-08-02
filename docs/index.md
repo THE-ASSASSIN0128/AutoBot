@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to AutoBot Documentation
 
 You can use the [editor on GitHub](https://github.com/THE-ASSASSIN0128/AutoBot/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 

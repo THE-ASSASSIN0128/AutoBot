@@ -18,6 +18,7 @@ function loadInteractions(client) {
     .setHeading("file", "status");
 
   const Interactions = [];
+  const DeveloperInteractions = [];
   const folders = fs
     .readdirSync(`${process.cwd()}/Interactions`)
   
@@ -36,23 +37,28 @@ function loadInteractions(client) {
         Table.addRow(file, "missing a description");
       };
 
-      Table.addRow(file, "🟢loaded");
+      
       
       client.interactions.set(command.name, command);
-      Interactions.push(command);
+      if (command.testOnly) {
+        DeveloperInteractions.push(command)
+      } else {
+        Interactions.push(command);
+      };
+
+      Table.addRow(file, "🟢loaded");
       
       continue;
     }
   }
-  (async(command) => {
-    if (command.testOnly) {
-      await rest.put(
-        Routes.applicationGuildCommands(bot.id, guilds.main), { body: Interactions });
-    } else {
-      await rest.put(
-        Routes.applicationCommands(bot.id), { body: Interactions });
-    };
-  })
+
+  rest.put(
+    Routes.applicationGuildCommands(bot.id, guilds.test),
+    { body: DeveloperInteractions });
+  rest.put(
+    Routes.applicationCommands(bot.id),
+    { body: Interactions });
+  
   
   return console.log(Table.toString());
 };

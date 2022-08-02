@@ -1,0 +1,26 @@
+Saving some codes for later uses..............
+
+const Status = new EmbedBuilder()
+      .setTitle("Bot is Online")
+      .setDescription(`To make some upgrades or to fix some bugs the bot was offline. Now the bot is online again.`)
+      .setThumbnail(`${client.user.avatarURL({
+        dynamic : true,
+        size : 4096
+      })}`)
+      .setColor(colour.bot)
+      .setFooter({
+        text: `${client.user.username} | V•${version}`,
+        iconURL: `${client.user.avatarURL({
+          dynamic: true,
+          size: 4096
+        })}`
+      })
+      .setTimestamp()
+
+
+
+for Roles Command ----------------------------->
+
+interaction.reply({
+      content: `${Roles.map(r => r).sort((roleA, roleB) => roleB.position - roleA.position).join("\n")}`
+    })

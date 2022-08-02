@@ -20,12 +20,6 @@ module.exports = {
       description: "Amount of messages to delete.",
       type: 4,
       required: true
-    },
-    {
-      name: "user",
-      description: "The user to delete messages",
-      type: 6,
-      required: false
     }
   ],
   execute: async (interaction, client) => {
@@ -34,22 +28,22 @@ module.exports = {
     let Response = new EmbedBuilder().setColor(colour.bot);
     
 
-    if (amount > 100 || !amount) return interaction.reply({
-      content: "Please enter a valid number between 1-100"
-    });
+    if ( amount === 0 || amount > 100 || !amount) {
+      interaction.reply({
+        content: "Please enter a valid number between 1-100"
+      });
+      await wait(5000),
+      interaction.deleteReply();
+      return;
+    };
+    
 
     if (user) {
       try {
         const Messages = await interaction.channel.messages.fetch();
         const i = 0;
-        const filtered = [];
-        (await Messages).filter( (m) => {
-          if (m.user.id === user.id && amount > i) {
-            filtered.push(m);
-            i++;
-          }
-        });
-        const msg = await interaction.channel.bulkDelete(filtered, true);
+        const userMessages = await Messages.filter((m) => m.author.id === user.id) && i++;
+        const msg = await interaction.channel.bulkDelete(userMessages, true);
         
         Response.setDescription(`Deleted **__${msg.size}__** Messages of **${user.tag}**.`);
         
@@ -63,14 +57,19 @@ module.exports = {
       };
     } else {
       const msg = await interaction.channel.bulkDelete(amount, true);
-        
-      Response.setDescription(`Deleted **__${msg.size}__** Messages.`);
-        
+
+      if (msg.size === 0) {
+        Response.setDescription(`**Unable to Delete any Message(s). The Messages Might be older than 14 days.**`);
+      } else {
+        Response.setDescription(`Deleted **__${msg.size}__** Messages.`);
+      };
+
       interaction.reply({
         embeds: [Response]
       });
       await wait (5000); 
       interaction.deleteReply();
+      
     };
   }
 };

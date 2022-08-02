@@ -20,34 +20,12 @@ module.exports = {
 	name: 'ready',
 	once: true,
 	async execute(client) {
-    let guild = await client.guilds.cache.get(guilds.main);
-    let channel = await guild.channels.fetch(channels.status);
-
-    const Status = new EmbedBuilder()
-      .setTitle("Bot is Online")
-      .setDescription(`To make some upgrades or to fix some bugs the bot was offline. Now the bot is online again.`)
-      .setThumbnail(`${client.user.avatarURL({
-        dynamic : true,
-        size : 4096
-      })}`)
-      .setColor(colour.bot)
-      .setFooter({
-        text: `${client.user.username} | V•${version}`,
-        iconURL: `${client.user.avatarURL({
-          dynamic: true,
-          size: 4096
-        })}`
-      })
-      .setTimestamp()
-
     
-		console.log(`Ready! Logged in as ${client.user.tag}`);
     client.user.setPresence({
       activities: [{
-        type: "LISTENING",
         name: "/help"
       }],
-      status: 5
+      status: "idle"
     });
     const Table = new ascii("Bot's Information");
     
@@ -57,7 +35,7 @@ module.exports = {
     Table.addRow("guild(s)", `${client.guilds.cache.size}`);
 
     
-    console.log(Table.toString());
+    console.log(Table.toString(), `\nReady! Logged in as ${client.user.tag}`);
     
     
     if (!DataBase) return;

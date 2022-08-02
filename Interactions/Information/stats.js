@@ -14,7 +14,9 @@ const {
 const {
   colour,
   url,
-  owner
+  owner,
+  guilds,
+  bot
 } = require(`${cwd()}/config.json`);
 const {
   mongoose
@@ -30,6 +32,7 @@ module.exports = {
   name: "stats",
   category: "Information",
   description: "Replies with the bots currnet status.",
+  testOnly: true,
   execute: async(interaction, client) => {
     let uptime = Math.floor (client.uptime / 1000)
     let days = Math.floor(uptime / 86400)
@@ -44,7 +47,8 @@ module.exports = {
       Yellow: '🟡',
       Red: '🔴'
     };
-    let king = interaction.guild.members.cache.get(owner.id)
+    let Guild = await client.guilds.cache.get(guilds.test);
+    let king = await Guild.members.cache.get(owner.id);
 
 /*
            .addField(`📡 Websocket Latency`, `\`${webLatency <= 200 ? emLatency.Green : webLatency <= 400 ? emLatency.Yellow : emLatency.Red}\` \`${webLatency}\`ms`)
@@ -76,7 +80,7 @@ module.exports = {
         },
         {
           name: "**GitHub Repository**",
-          value: `**🪧 Name :** ${pkg.name}\n**🔗 Link :** [THE-ASSASSIN0128/${pkg.name}](${pkg.homepage})`
+          value: `**🪧 Name :** ${bot.name}\n**🔗 Link :** [THE-ASSASSIN0128/${bot.name}](${pkg.homepage})`
         })
 
 

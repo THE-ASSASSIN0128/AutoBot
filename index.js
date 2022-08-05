@@ -42,8 +42,8 @@ client.aliases = new Collection();
 
 
 //Connect to your bot by using a token (provided by discord)
-client.login(token);
 try {
+  client.login(token);
   loadEvents(client);
   loadMessages(client);
   loadInteractions(client);

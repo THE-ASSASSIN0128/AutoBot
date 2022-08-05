@@ -1,7 +1,8 @@
 const {
   bot,
   image,
-  guilds
+  guilds,
+  testBot
 } = require(`${process.cwd()}/config.json`);
 const {
   Routes,

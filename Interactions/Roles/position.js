@@ -29,24 +29,30 @@ module.exports = {
     const guild = interaction.guild;
     const role = interaction.options.getRole("role");
     const position = interaction.options.getInteger("position");
-
+    const HighestRole = guild.roles.highest;
+    
     try {
-      await guild.roles.setPosition(role.id, position);
-      const r = await guild.roles.cache.get(role.id);
-      interaction.reply({
-        content: `Change the role [${role}] position to __${r.position}__.`,
-        ephemeral: true
-      });
+      if (HighestRole.position === role.position) {
+        await guild.roles.setPosition(role.id, position);
+        const r = await guild.roles.cache.get(role.id);
+        interaction.reply({
+          content: `Change the role [${role}] position to __${r.position}__.\nHighest Role : ${HighestRole.position}`,
+          ephemeral: true
+        });
+      } else {
+        interaction.reply({
+          content: `The position you provided is higher or equal to my role position`,
+          ephemeral: true
+        });
+      };
+      
+      
 
     } catch (err) {
       interaction.reply({
         content: `**ERROR :** ${err}`,
         ephemeral: true
       });
-    };
-    
-    
-    
-        
+    };     
   }
 }
